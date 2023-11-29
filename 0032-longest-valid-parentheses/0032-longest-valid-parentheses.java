@@ -12,8 +12,6 @@ class Solution {
             } else if (c == ')'){
                 if(s.charAt(stack.peek()) == '(') {
                     stack.pop();
-
-
                 if(stack.isEmpty()) {
                     left = -1;
                 } else {
