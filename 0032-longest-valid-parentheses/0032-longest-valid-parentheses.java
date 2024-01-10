@@ -5,22 +5,31 @@ class Solution {
         int left = -1;
         for(int i=0; i<s.length(); i++) {
             char c = s.charAt(i);
-
-            if(stack.isEmpty() || c == '(' || c == s.charAt(stack.peek())) {
-                left = i;
+            if(c == '(') {
                 stack.push(i);
-            } else if (c == ')'){
-                if(s.charAt(stack.peek()) == '(') {
+            } else if (stack.isEmpty()) {
+                stack.push(i);
+                left = i;
+            } else {
+                if (!stack.isEmpty() && stack.peek() != left) {
                     stack.pop();
-                if(stack.isEmpty()) {
-                    left = -1;
                 } else {
-                    left = stack.peek();
-                }
-                max = Math.max(max, i - left);
+                    stack.push(i);
+                    left = i;
                 }
             }
+
+            if(stack.isEmpty()) {
+                max = Math.max(max, i - left);
+            }
         }
+
+        int right = s.length();
+        while(!stack.isEmpty()) {
+            max = Math.max(max, right - stack.peek() - 1);
+            right = stack.pop();
+        }
+        max = Math.max(right, max);
         return max;
     }
 }
