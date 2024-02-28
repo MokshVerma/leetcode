@@ -8,9 +8,6 @@ class Solution {
                 sum = 0;
             }
             sum += nums[i];
-            if(sum < 0){
-                sum = nums[i];
-            }
             max = Math.max(sum, max);
         }
         return max;
